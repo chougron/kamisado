@@ -1,0 +1,19 @@
+{
+  "extends": ["medway-common/tslint.json", "tslint:recommended", "tslint-config-airbnb", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["config/**", "node_modules/**/*.ts"]
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "import-name": false,
+    "ordered-imports": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
+    "function-name": false,
+    "no-console": {
+      "severity": "error",
+      "options": ["debug", "info", "log", "error"]
+    },
+    "interface-name": [true, "never-prefix"],
+    "prefer-array-literal": false
+  }
+}

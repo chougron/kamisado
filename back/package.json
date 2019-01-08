@@ -1,0 +1,51 @@
+{
+  "name": "kamisado-api",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "build.watch": "tsc -w",
+    "start": "make db.migrate.run && node dist/src/server.js",
+    "lint": "tslint --project tsconfig.json",
+    "lint.fix": "tslint --project tsconfig.json --fix",
+    "format": "prettier './src/**/*.{js,ts}' --write",
+    "format.check": "prettier './src/**/*.{js,ts}' --list-different"
+  },
+  "author": "Camille Hougron",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">= 10 < 11.0",
+    "yarn": ">= 1.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "flat": "^4.1.0",
+    "jsonwebtoken": "^8.4.0",
+    "kamisado-common": "../common",
+    "pg": "^7.7.1",
+    "ts-node": "^7.0.1",
+    "typeorm": "^0.2.9",
+    "typescript": "^3.2.2",
+    "uuid": "^3.3.2",
+    "winston": "^3.1.0",
+    "yarn": "^1.12.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.0",
+    "@types/express-jwt": "^0.0.40",
+    "@types/flat": "^0.0.28",
+    "@types/jest": "^23.3.11",
+    "@types/jsonwebtoken": "^8.3.0",
+    "@types/pg": "^7.4.11",
+    "@types/uuid": "^3.4.4",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0"
+  }
+}

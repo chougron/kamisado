@@ -1,0 +1,14 @@
+.tile {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid black;
+  z-index: 10;
+}
+
+.tile .playableTile {
+  width: 60%;
+  height: 60%;
+  margin: 20%;
+  border: 5px solid rgba(255, 255, 255, 0.25);
+  box-sizing: border-box;
+}

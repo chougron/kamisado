@@ -1,0 +1,5 @@
+linters:
+  'src/**/*.{ts,js}':
+    - yarn lint
+    - prettier --write
+    - git add

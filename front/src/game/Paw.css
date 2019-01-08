@@ -1,0 +1,12 @@
+.paw {
+  position: absolute;
+  box-sizing: border-box;
+  border: 7px solid;
+  z-index: 100;
+  border-radius: 9999px;
+  transition: all 1s ease-in-out;
+}
+
+.paw.activePaw {
+  border-color: red !important;
+}

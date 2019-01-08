@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": ["node_modules/**/*.ts"]
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "import-name": false,
+    "ordered-imports": false,
+    "no-console": {
+      "severity": "error",
+      "options": ["debug", "info", "log", "error"]
+    },
+    "no-unused-variable": true,
+    "interface-name": [true, "never-prefix"],
+    "prefer-array-literal": false
+  }
+}
