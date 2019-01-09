@@ -1,10 +1,11 @@
-import { Player } from 'kamisado-common/dist/business/player/type';
+import { ApiPlayer } from 'kamisado-common/dist/business/player/type';
 import { Pool } from 'pg';
 import currentPool from '../../../technical/db';
 
 interface PlayerRow {
   id: number;
   username: string;
+  password: string;
 }
 
 class DoctorRepository {
@@ -26,16 +27,23 @@ class DoctorRepository {
     return this.fetchOne(query, [rpps]);
   }
 
+  public async create(player: ApiPlayer) {
+    const query = 'INSERT INTO "player" (username, password) VALUES ($1, $2) RETURNING *';
+
+    return this.fetchOne(query, [player.username, player.password]);
+  }
+
   public async getAll() {
     const query = 'SELECT * FROM "player";';
 
     return this.fetchAll(query, []);
   }
 
-  private playerFromRow(row: PlayerRow): Player {
-    const player: Player = {
+  private playerFromRow(row: PlayerRow): ApiPlayer {
+    const player: ApiPlayer = {
       id: row.id,
       username: row.username,
+      password: row.password,
     };
 
     return player;
@@ -45,7 +53,7 @@ class DoctorRepository {
    * @param query
    * @param values Array of values of any type bound to the query
    */
-  private async fetchOne(query: string, values: any[]): Promise<Player | null> {
+  private async fetchOne(query: string, values: any[]): Promise<ApiPlayer | null> {
     const { rows } = await this.pool.query(query, values);
 
     if (rows.length === 0) {
@@ -59,7 +67,7 @@ class DoctorRepository {
    * @param query
    * @param values Array of values of any type bound to the query
    */
-  private async fetchAll(query: string, values: any[]): Promise<Player[]> {
+  private async fetchAll(query: string, values: any[]): Promise<ApiPlayer[]> {
     const { rows } = await this.pool.query(query, values);
 
     return rows.map((row: PlayerRow) => this.playerFromRow(row));

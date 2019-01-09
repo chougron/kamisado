@@ -27,6 +27,10 @@ export const NUMERIC = (message: string) => ({
   },
 });
 
+export const IDENTIC = (otherField: string, message: string) => ({
+  identic: { otherField, message },
+});
+
 export const INTEGER = {
   numericality: {
     onlyInteger: true,
@@ -100,6 +104,23 @@ validate.validators.onlyForKey = (
     return;
   }
   return validate.single(value, options.values[attributes[options.key]]);
+};
+
+interface IdenticOptions {
+  otherField: string;
+  message: string;
+}
+
+validate.validators.identic = (
+  value: unknown,
+  options: IdenticOptions,
+  key: string,
+  attributes: any,
+): string[] | undefined => {
+  if (!attributes[options.otherField] || attributes[options.otherField] !== value) {
+    return [options.message];
+  }
+  return;
 };
 
 export const ONLY_FOR_KEY = ({ key, values }: OnlyForKeyOptions) => ({

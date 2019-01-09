@@ -16,6 +16,10 @@ export class CreateTableDoctor1546530051398 implements MigrationInterface {
             name: 'username',
             type: 'varchar',
           },
+          {
+            name: 'password',
+            type: 'varchar',
+          },
         ],
       }),
     );

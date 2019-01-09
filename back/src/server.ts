@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // JWT auth
 app.use(tidMiddleware);
-app.use(authMiddleware.unless({ path: ['/api/status', '/api/v1/player/login'] }));
+app.use(authMiddleware.unless({ path: ['/api/status', '/api/v1/player/login', '/api/v1/player/subscribe'] }));
 app.use(express.json());
 
 // [ ROUTES ]
