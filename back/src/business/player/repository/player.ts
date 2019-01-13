@@ -1,4 +1,4 @@
-import { ApiPlayer } from 'kamisado-common/dist/business/player/type';
+import { ApiPlayer, ExistingApiPlayer } from 'kamisado-common/dist/business/player/type';
 import { Pool } from 'pg';
 import currentPool from '../../../technical/db';
 
@@ -39,8 +39,8 @@ class DoctorRepository {
     return this.fetchAll(query, []);
   }
 
-  private playerFromRow(row: PlayerRow): ApiPlayer {
-    const player: ApiPlayer = {
+  private playerFromRow(row: PlayerRow): ExistingApiPlayer {
+    const player: ExistingApiPlayer = {
       id: row.id,
       username: row.username,
       password: row.password,
@@ -53,7 +53,7 @@ class DoctorRepository {
    * @param query
    * @param values Array of values of any type bound to the query
    */
-  private async fetchOne(query: string, values: any[]): Promise<ApiPlayer | null> {
+  private async fetchOne(query: string, values: any[]): Promise<ExistingApiPlayer | null> {
     const { rows } = await this.pool.query(query, values);
 
     if (rows.length === 0) {

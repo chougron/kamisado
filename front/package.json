@@ -20,6 +20,7 @@
   "dependencies": {
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
+    "axios": "^0.18.0",
     "formik": "^1.4.1",
     "kamisado-common": "file:../common",
     "react": "^16.6.3",
@@ -37,6 +38,7 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/axios": "^0.14.0",
     "@types/jest": "^23.3.10",
     "@types/material-ui": "^0.21.5",
     "@types/node": "^10.12.17",
@@ -44,6 +46,7 @@
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.12",
     "@types/react-router-dom": "^4.3.1",
+    "@types/redux-thunk": "^2.1.0",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.0.1",

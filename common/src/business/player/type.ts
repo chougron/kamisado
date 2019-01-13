@@ -6,3 +6,7 @@ export interface Player {
 export interface ApiPlayer extends Player {
   password: string;
 }
+
+export interface ExistingApiPlayer extends ApiPlayer {
+  id: number;
+}

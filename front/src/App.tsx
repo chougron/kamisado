@@ -9,37 +9,58 @@ import Menu from './page/Menu';
 import MultiplayerGame from './page/MultiplayerGame';
 import { GameType } from './reducers/multiplayer';
 import { IState as GlobalState } from './store';
+import Login from './page/Login';
 
 enum Page {
+  Login,
   Menu,
   Game,
   MultiplayerGame,
 }
 
 interface IState {
-  currentPage: Page;
+  currentNonLoggedPage: Page;
+  currentLoggedPage: Page;
 }
 
 interface IDispatchProps {
   changeGameType: (gameType: GameType) => void;
 }
 
-class App extends React.Component<IDispatchProps, IState> {
-  public constructor(props: IDispatchProps) {
+interface IStateProps {
+  username: string;
+}
+
+type Props = IDispatchProps & IStateProps;
+
+class App extends React.Component<Props, IState> {
+  public constructor(props: Props) {
     super(props);
 
     this.state = {
-      currentPage: Page.Menu,
+      currentNonLoggedPage: Page.Login,
+      currentLoggedPage: Page.Menu,
     };
   }
 
   public render() {
-    const { currentPage } = this.state;
+    const { currentNonLoggedPage, currentLoggedPage } = this.state;
+    const { username } = this.props;
     return (
       <div className="App">
-        {currentPage === Page.Menu && <Menu goToGame={this.goToGame} goToMultiplayerGame={this.goToMultiplayerGame} />}
-        {currentPage === Page.Game && <Game />}
-        {currentPage === Page.MultiplayerGame && <MultiplayerGame />}
+        {username === '' && (
+          <div>{currentNonLoggedPage === Page.Login && <Login goToRegister={this.goToRegister} />}</div>
+        )}
+
+        {username !== '' && (
+          <>
+            {currentLoggedPage === Page.Menu && (
+              <Menu goToGame={this.goToGame} goToMultiplayerGame={this.goToMultiplayerGame} />
+            )}
+            {currentLoggedPage === Page.Game && <Game />}
+            {currentLoggedPage === Page.MultiplayerGame && <MultiplayerGame />}
+          </>
+        )}
       </div>
     );
   }
@@ -47,19 +68,25 @@ class App extends React.Component<IDispatchProps, IState> {
   public goToGame = () => {
     this.props.changeGameType(GameType.LOCAL);
     this.setState({
-      currentPage: Page.Game,
+      currentLoggedPage: Page.Game,
     });
   };
 
   public goToMultiplayerGame = () => {
     this.props.changeGameType(GameType.MULTIPLAYER);
     this.setState({
-      currentPage: Page.MultiplayerGame,
+      currentLoggedPage: Page.MultiplayerGame,
     });
   };
+
+  public goToRegister = () => {
+    //Going to register page
+  };
 }
-const mapStateToProps = (state: GlobalState, props: IDispatchProps): {} => {
-  return {};
+const mapStateToProps = (state: GlobalState, props: IDispatchProps): IStateProps => {
+  return {
+    username: state.account.username,
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, props: IDispatchProps): IDispatchProps => {
@@ -68,7 +95,7 @@ const mapDispatchToProps = (dispatch: Dispatch, props: IDispatchProps): IDispatc
   };
 };
 
-export default connect<{}, IDispatchProps>(
+export default connect<IStateProps, IDispatchProps>(
   mapStateToProps,
   mapDispatchToProps,
 )(App);

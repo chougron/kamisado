@@ -77,7 +77,9 @@ module.exports = {
       autorestart: true,
       watch: false,
       max_memory_restart: "1G",
-      env: {}
+      env: {
+        API_URL: "http://0.0.0.0:3000"
+      }
     },
     {
       name: "Database",
